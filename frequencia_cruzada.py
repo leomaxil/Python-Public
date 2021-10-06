@@ -1,5 +1,5 @@
 #Frequencia cruzada e relativa
-def cfreq(a,b,digit=2,ref='index'):
+def cfreq(a,b,digit=2,ref='columns'):
 
     """Função para retornar frequencia cruzada relativa com missing e totais"""
     """[a] e [b]  - dados a serem estudados - Ex: ctable(df['Sex'],df['age'])"""

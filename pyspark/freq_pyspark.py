@@ -33,4 +33,4 @@ def freq_simples(x: str, df: DataFrame, decimal_cases: int = 3, relative_perc: s
                      )    
 
 
-    return df_result.display()
+    return df_result.withColumnRenamed('count', 'N').display()

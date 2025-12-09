@@ -1,3 +1,7 @@
+from pyspark.sql import functions as F
+from pyspark.sql import DataFrame
+
+
 def describe_simples(x: str, df: DataFrame, group_by: str = [], decimal_cases: int = 3) -> DataFrame:
     """
     Generates descriptive statistics for a numeric column with optional grouping.

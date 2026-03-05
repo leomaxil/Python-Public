@@ -21,10 +21,12 @@ def describe_simples(x: str, df: DataFrame, group_by: str = [], decimal_cases: i
     Returns:
         DataFrame: A DataFrame with summary statistics including:
             - min: Minimum value
+            - P10: 10th percentile
             - P25: 25th percentile (first quartile)
             - avg: Mean/average value
             - P50: 50th percentile (median)
             - P75: 75th percentile (third quartile)
+            - P90: 90th percentile
             - max: Maximum value
             - std: Standard deviation
             - Nulls: Missing values
@@ -41,10 +43,12 @@ def describe_simples(x: str, df: DataFrame, group_by: str = [], decimal_cases: i
     """
     df_result = (df.groupBy(group_by).agg(
         F.round(F.min(x),decimal_cases).alias('Min'),
+        F.round(F.approx_percentile(x, 0.10),decimal_cases).alias('P10'),
         F.round(F.approx_percentile(x, 0.25),decimal_cases).alias('P25'),
         F.round(F.avg(x), decimal_cases).alias('Avg'),
         F.round(F.approx_percentile(x, 0.5),decimal_cases).alias('P50'),
         F.round(F.approx_percentile(x, 0.75),decimal_cases).alias('P75'),
+        F.round(F.approx_percentile(x, 0.90),decimal_cases).alias('P90'),
         F.round(F.max(x),decimal_cases).alias('Max'),
         F.round(F.stddev(x),decimal_cases).alias('Std'),
         F.count('*').alias('N'),
